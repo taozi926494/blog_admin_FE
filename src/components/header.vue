@@ -5,14 +5,15 @@
 </template>
 
 <style lang="scss">
+	$maincolor: #277DD6;
 	header{
 		width:100%;
-		height: 80px;
-		line-height: 40px;
-		background: #ff3d3d;
-		
+		height: 60px;
+		line-height: 60px;
+		border-bottom: 1px solid #aaa;
+		border-top: 3px solid $maincolor;
 		span{
-			color: #fff;
+			margin-left: 50px;
 		}
 	}
 </style>
