@@ -3,8 +3,48 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
+
+Vue.use(ElementUI)
 
 Vue.config.productionTip = false
+
+var categoryData = [
+            {
+              title: '前端',
+              content: [
+                {
+                  id: '1-2',
+                  name: 'HTML5'
+                },
+                {
+                  id: '2-2',
+                  name: 'Vue'
+                }
+              ]
+            },
+            {
+              title: '后端',
+              content: [
+                {
+                  id: '2-2',
+                  name: 'PHP'
+                },
+                {
+                  id: '2-3',
+                  name: 'ThinkPHP'
+                },
+                {
+                  id: '2-4',
+                  name: 'Django'
+                },{
+                  id: '2-5',
+                  name: 'NodeJS'
+                }
+              ]
+            }
+          ]
 
 new Vue({
   el: '#app',

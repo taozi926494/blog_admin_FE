@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import index from '@/views/index.vue'
+import category from '@/views/category.vue'
 import second from '@/views/second.vue'
 
 Vue.use(Router)
@@ -11,12 +11,12 @@ export default new Router({
     {
 		path: '/',
 		name: 'home',
-		component: index
+		component: category
     },
     {
-    	path: '/index',
-    	name: 'index',
-    	component: index
+    	path: '/category',
+    	name: 'category',
+    	component: category
     },
     {
     	path: '/second',
