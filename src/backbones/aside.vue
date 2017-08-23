@@ -11,16 +11,14 @@
 	        	<template slot="title"><i class="el-icon-document"></i>文章列表</template>
 
 	         	<el-menu-item-group v-for="category in categoryData" index="category.id">
-		     	  <span slot="title">{{category.title}}</span>
+		     	  <span slot="title">{{category.name}}</span>
 
-		     	  <router-link  v-for="subcate in category.subcate" :to="'/c/' + category.id + '-' + subcate.id">
+		     	  <router-link  v-for="subcate in category.subcate" :to="'/list/' + category.id + '-' + subcate.id">
 			     	  <el-menu-item :index="category.id + '-' + subcate.id">
 			     	  {{subcate.name}}
 			     	   </el-menu-item>
 		     	  </router-link>
-
 			   	</el-menu-item-group>
-
 	    	 </el-submenu>
 
 	    </el-menu>
@@ -29,14 +27,14 @@
 
 <style lang="scss">
 	aside{
-		float: left;
+		display: table-cell;
 		height: 100%;
-		width: 201px;
-		min-height: 400px;
+		min-width: 201px;
 		border-right: 1px solid #999;
 		padding-top: 10px;
 
 		a{color: #666;}
+		&:after {content:"."; display:block; height:0; visibility:hidden; clear:both; }
 	}
 </style>
 

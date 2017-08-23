@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import category from '@/views/category.vue'
-import second from '@/views/second.vue'
+import list from '@/views/list.vue'
 
 Vue.use(Router)
 
@@ -19,9 +19,8 @@ export default new Router({
     	component: category
     },
     {
-    	path: '/second',
-    	name: 'second',
-    	component: second
+    	path: '/list/:categoryid',
+    	component: list
     }
   ]
 })
