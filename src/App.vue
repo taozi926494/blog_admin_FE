@@ -2,7 +2,7 @@
 	<div id="app">
 		<v-header class="animated slideInDown"></v-header>
 		<div id="mainland" class="clearfloat">
-			<v-aside class="animated slideInLeft" :category-data="categoryData"></v-aside>
+			<v-aside class="animated slideInLeft" :category-data="categoryData" :activeindex="activeIndex"></v-aside>
 			<div id="content" class="animated fadeInDown clearfloat">
 				<router-view :category-data="categoryData"></router-view>
 			</div>
@@ -24,18 +24,42 @@
 	  	vAside,
 	  	vFooter,
 	  },
+	  data() {
+	  	return {
+	        categoryData: {},
+	        activeIndex: ""
+	      }
+	  },
 	  created() {
         // 请求所有分类数据
         var _self = this;
         axios.get('http://www.easy-mock.com/mock/599a9c0c059b9c566dc9bfaa/blog/admin/category')
         	.then((data) => {
         		_self.categoryData = data.data
+        		const router = window.location.hash.substring(2);
+		    	const listReg = new RegExp('list/');
+		    	if (router == '' || router == 'category') {
+		    		this.activeIndex = '0';
+		    	}else {
+		    		if (listReg.test(router)) {
+		    			const listId = router.replace(listReg, '').split('-');
+		    			var i = 0;
+		    			for (; i < this.categoryData.length; i++) {
+		    				if (this.categoryData[i].id == parseInt(listId[0])) {
+		    					break;
+		    				}
+		    			}
+		    			var j = 0
+		    			for(j; j < this.categoryData[i].subcate.length; j++){
+		    				if (this.categoryData[i].subcate[j].id == parseInt(listId[1])) {
+		    					break;
+		    				}
+		    			}
+	    				this.activeIndex = Number(i + 1).toString() + '-' + Number(j + 1).toString();
+	    				console.log(this.activeIndex)
+		    		}
+		    	}
         	})
-	  },
-	  data() {
-	  	return {
-	        categoryData: {}
-	      }
 	  }
 	}
 </script>

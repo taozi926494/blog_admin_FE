@@ -104,7 +104,7 @@
 		  		this.delData.name = category.name;
 		  		this.delVisible = true;
 		  	},
-		  	add: function(objname){
+		  	add: function(objname) {
 		  		if (objname == "dad") {
 		  			this.isDad = true;
 		  		} else if (objname == "son") {
@@ -119,7 +119,7 @@
 
 <style lang="scss">
 	$maincolor: #277DD6;
-	.category_dad{
+	.category_dad {
 		width: auto;
 		margin: 0 auto;
 
@@ -135,16 +135,16 @@
 			}
 		}
 
-		.title{
+		.title {
 			font-weight: 700;
 			border-bottom: 1px solid #333
 		}
-		.el-icon-edit{
+		.el-icon-edit {
 			color: $maincolor;
 			cursor: pointer;
 			padding-left:6px;
 		}
-		.el-icon-circle-close{
+		.el-icon-circle-close {
 			color: red;
 			cursor: pointer;
 			padding-left: 6px;

@@ -1,7 +1,8 @@
 <template>
-	<div>
-		 	<el-table
+	<div id="article_list">
+		 <el-table
 		    	:data="listData.data"
+				:empty-text="empty_text"
 		    	style="width: 100%">
 		    <el-table-column
 		     	prop="title"
@@ -15,7 +16,7 @@
 		      	prop="prop"
 		      	label="属性">
 		    </el-table-column>
-		  </el-table>
+		 </el-table>
 
 		<el-pagination
 		    layout="prev, pager, next"
@@ -23,8 +24,14 @@
 		 </el-pagination>
 	</div>
 </template>
-<style>
-	
+
+<style lang="scss">
+	#article_list {
+		.el-pagination {
+			float: right;
+			margin: 20px 0;
+		}
+	}
 </style>
 
 <script>
@@ -36,22 +43,41 @@
 					totalpage: 0,
 					nowpage: 0,
 					data: []
-				}
+				},
+				empty_text: "拼命加载中..."
 			}
 		},
-		mounted: function(){
+		mounted: function () {
 			var _self = this;
+			_self.empty_text = "拼命加载中...";
 			axios.get("http://www.easy-mock.com/mock/599a9c0c059b9c566dc9bfaa/blog/list/" + _self.$route.params.categoryid)
 				.then((data) => {
 					_self.listData = data.data;
 				})
+				.catch(function (error) {
+					_self.empty_text = "Sorry, 暂无数据"
+					_self.listData = {
+						totalpage: 0,
+						nowpage: 0,
+						data: []
+					}
+				})
 		},
 		watch: {
-			$route: function(to, from){
+			$route: function (to, from) {
 				var _self = this;
+				_self.empty_text = "拼命加载中...";
 				axios.get("http://www.easy-mock.com/mock/599a9c0c059b9c566dc9bfaa/blog/list/" + _self.$route.params.categoryid)
 				.then((data) => {
 					_self.listData = data.data;
+				})
+				.catch(function (error) {
+					_self.empty_text = "Sorry, 暂无数据"
+					_self.listData = {
+						totalpage: 0,
+						nowpage: 0,
+						data: []
+					}
 				})
 			}
 		}

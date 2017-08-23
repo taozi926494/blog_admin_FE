@@ -1,6 +1,7 @@
 <template>
 	<aside>
-		<el-menu default-active="0" class="el-menu-vertical-demo">
+		<el-menu class="el-menu-vertical-demo" :default-active="activeindex">
+			<p>{{activeindex}}</p>
 			<router-link to="/category">
 				<el-menu-item index="0">
 		      		<i class="el-icon-menu"></i>分类管理
@@ -10,7 +11,7 @@
 	        <el-submenu index="1">
 	        	<template slot="title"><i class="el-icon-document"></i>文章列表</template>
 
-	         	<el-menu-item-group v-for="category in categoryData" index="category.id">
+	         	<el-menu-item-group v-for="category in categoryData" cateid="category.id" index="index">
 		     	  <span slot="title">{{category.name}}</span>
 
 		     	  <router-link  v-for="subcate in category.subcate" :to="'/list/' + category.id + '-' + subcate.id">
@@ -33,13 +34,13 @@
 		border-right: 1px solid #999;
 		padding-top: 10px;
 
-		a{color: #666;}
+		a {color: #666;}
 		&:after {content:"."; display:block; height:0; visibility:hidden; clear:both; }
 	}
 </style>
 
 <script>
-	 export default {
-	    props: ['categoryData']
+	export default {
+	    props: ['categoryData', 'activeindex']
 	  }
 </script>
