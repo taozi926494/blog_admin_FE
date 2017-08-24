@@ -3,7 +3,7 @@
 		 <el-table
 		    	:data="listData.data"
 				:empty-text="empty_text"
-		    	style="width: 100%">
+		    	style="width: 90%;">
 		    <el-table-column
 		     	prop="title"
 		     	label="标题">
@@ -16,6 +16,15 @@
 		      	prop="prop"
 		      	label="属性">
 		    </el-table-column>
+		    <el-table-column
+		      	prop="options"
+		      	label="操作"
+		      	width="100">
+		      	 <template scope="scope">
+			        <el-button type="text" size="small">查看</el-button>
+			        <el-button type="text" size="small">编辑</el-button>
+			      </template>
+		    </el-table-column>
 		 </el-table>
 
 		<el-pagination
@@ -27,9 +36,10 @@
 
 <style lang="scss">
 	#article_list {
+		padding: 60px;
 		.el-pagination {
 			float: right;
-			margin: 20px 0;
+			margin: 20px 10% 20px 0;
 		}
 	}
 </style>
@@ -37,6 +47,7 @@
 <script>
 	import axios from 'axios';
 	export default {
+		props: ['categoryData'],
 		data() {
 			return {
 				listData: {

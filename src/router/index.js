@@ -20,6 +20,7 @@ export default new Router({
     },
     {
     	path: '/list/:categoryid',
+        name: 'list',
     	component: list
     }
   ]

@@ -10,45 +10,17 @@ Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 
-var categoryData = [
-            {
-              title: '前端',
-              content: [
-                {
-                  id: '1-2',
-                  name: 'HTML5'
-                },
-                {
-                  id: '2-2',
-                  name: 'Vue'
-                }
-              ]
-            },
-            {
-              title: '后端',
-              content: [
-                {
-                  id: '2-2',
-                  name: 'PHP'
-                },
-                {
-                  id: '2-3',
-                  name: 'ThinkPHP'
-                },
-                {
-                  id: '2-4',
-                  name: 'Django'
-                },{
-                  id: '2-5',
-                  name: 'NodeJS'
-                }
-              ]
-            }
-          ]
-
 new Vue({
   el: '#app',
   router,
+
+  /**
+  * 非vuex下的非父子组件通信
+  */
+  data: {
+    Bus: new Vue()
+  },
+
   /**
   * 将 h 作为 createElement 的别名是 Vue 生态系统中的一个通用惯例，
   * 实际上也是 JSX 所要求的，如果在作用域中 h 失去作用， 在应用中会触发报错

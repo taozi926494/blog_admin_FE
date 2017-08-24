@@ -113,7 +113,12 @@
 		  		this.addVisible = true;
 
 		  	}
-		  }
+		},
+		watch: {
+			$route: function(){
+				this.$root.Bus.$emit('categoryRouteChanged')
+			}
+		}
 	  }
 </script>
 
