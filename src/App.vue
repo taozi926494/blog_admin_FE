@@ -4,7 +4,9 @@
 		<div id="mainland" class="clearfloat">
 			<v-aside class="animated slideInLeft" :category-data="categoryData"></v-aside>
 			<div id="content" class="animated fadeInDown">
-					<router-view :category-data="categoryData"></router-view>
+					<div class="content-pad">
+						<router-view :category-data="categoryData"></router-view>
+					</div>
 			</div>
 		</div>
 		<v-footer class="animated slideInUp"></v-footer>
@@ -51,7 +53,7 @@
 	 	 	* @return String (e.g.) '0' => #/categroy ; '1-0-1' => #/list/1-1
 	 	 	*/
 	 	 	getActiveIndex: function (categoryData) {
-        		const router = window.location.hash.substring(2);
+        		const router = window.location.hash.substring(2, 10);
 		    	const listReg = new RegExp('list/');
 		    	var activeIndex = this.activeIndex;
 		    	if (router == '' || router == 'category') {
@@ -112,6 +114,10 @@
 			box-sizing: border-box;
 			width: 100%;
 
+			.content-pad {
+				width: 90%;
+				margin: 20px 5%;
+			}
 		}
 	}
 </style>
