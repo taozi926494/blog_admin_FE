@@ -1,10 +1,13 @@
 <template>
 	<div id="article_list">
-		<i class="el-icon-plus add-aticle" @mouseenter="addArticleMouseEnter" @mouseout="addArticleMouseout"></i>
+		<router-link :to="'/addArticle/' + nowCategory()">
+			<i class="el-icon-plus add-aticle" @mouseenter="addArticleMouseEnter" @mouseout="addArticleMouseout"></i>
+		</router-link>
 		 <el-table
 		    	:data="listData.data"
 				:empty-text="empty_text"
-		    	style="width: 100%;">
+		    	style="width: 100%;"
+		    	v-loading.body="loading">
 		    <el-table-column
 		     	prop="title"
 		     	label="标题">
@@ -94,18 +97,22 @@
 				},
 				empty_text: "拼命加载中...",
 				currentPage: 1,
-				pageSize: 15
+				pageSize: 15,
+				loading: true
 			}
 		},
 		mounted: function () {
 			var _self = this;
 			_self.empty_text = "拼命加载中...";
+			_self.loading = true;
 			axios.get("http://www.easy-mock.com/mock/599a9c0c059b9c566dc9bfaa/blog/list/" + _self.$route.params.categoryid + '/p/' + _self.currentPage + '/n/' + _self.$refs.pagination.pageSize)
 				.then((data) => {
+					_self.loading = false;
 					_self.listData = data.data;
 				})
 				.catch(function (error) {
 					_self.empty_text = "Sorry, 暂无数据"
+					_self.loading = false;
 					_self.listData = {
 						totalpage: 0,
 						nowpage: 0,
@@ -117,11 +124,14 @@
 			$route: function (to, from) {
 				var _self = this;
 				_self.empty_text = "拼命加载中...";
+				_self.loading = true;
 				axios.get("http://www.easy-mock.com/mock/599a9c0c059b9c566dc9bfaa/blog/list/" + _self.$route.params.categoryid + '/p/' + _self.currentPage + '/n/' + _self.$refs.pagination.pageSize)
 				.then((data) => {
+					_self.loading = false;
 					_self.listData = data.data;
 				})
 				.catch(function (error) {
+					_self.loading = false;
 					_self.empty_text = "Sorry, 暂无数据"
 					_self.listData = {
 						totalpage: 0,
@@ -135,13 +145,14 @@
 			pageChange: function () {
 				var _self = this;
 				_self.empty_text = "拼命加载中...";
+				_self.loading = true;
 				axios.get("http://www.easy-mock.com/mock/599a9c0c059b9c566dc9bfaa/blog/list/" + _self.$route.params.categoryid + '/p/' + _self.currentPage + '/n/' + _self.$refs.pagination.pageSize)
 					.then((data) => {
+						_self.loading = false;
 						_self.listData = data.data;
-						console.log(data.data)
-
 					})
 					.catch(function (error) {
+						_self.loading = false;
 						_self.empty_text = "Sorry, 暂无数据"
 						_self.listData = {
 							totalpage: 0,
@@ -159,6 +170,9 @@
 				const reg = new RegExp('\\s+mouseenter|\\s+mouseout', 'g')
 				event.target.className = event.target.className.replace(reg, "")
 				event.target.className += ' mouseout'
+			},
+			nowCategory: function(){
+				return (window.location.hash.substring(7, 10));
 			}
 		}
 	}

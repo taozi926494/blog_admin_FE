@@ -5,6 +5,7 @@ import category from '@/views/category.vue'
 import list from '@/views/list.vue'
 import articleView from '@/views/articleView.vue'
 import articleEdit from '@/views/articleEdit.vue'
+import articleAdd from '@/views/articleAdd.vue'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
         path: '/editArticle/:articleid',
         name: 'editArticle',
         component: articleEdit
+    },
+    {
+        path: '/addArticle/:categoryid',
+        name: 'addArticle',
+        component: articleAdd
     }
   ]
 })
