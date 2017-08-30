@@ -35,7 +35,7 @@
 	    created() {
           // 请求所有分类数据
             var _self = this;
-	        axios.get('http://www.easy-mock.com/mock/599a9c0c059b9c566dc9bfaa/blog/admin/category')
+	        axios.get('http://localhost/blog/public/holeadmin/category/index')
 	        	.then((data) => {
 	        		_self.categoryData = data.data;
 	        		_self.activeIndex = _self.getActiveIndex(_self.categoryData);
